@@ -4,18 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\mahasiswa;
-use App\Models\akademik;
-use App\Models\rekomendasi;
+use App\Models\magang;
 
-class APIController extends Controller
+class MagangController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = mahasiswa::all();
+        $data = magang::all();
         return $data;
     }
 
@@ -32,22 +30,21 @@ class APIController extends Controller
      */
     public function store(Request $request)
     {
-        // return "hello";
-        $save = new mahasiswa;
-        $save->NIM = $request->NIM;
-        $save->Nama = $request->Nama;
-        $save->Prodi = $request->Prodi;
-        $save->Alamat = $request->Alamat;
+        $save = new magang;
+        $save->nama_tempat = $request->nama_tempat;
+        $save->posisi = $request->posisi;
+        $save->alamat = $request->alamat;
         $save->save();
 
-        return "Berhasil Menyimpan Data Mahasiswa";
+        return "Berhasil Menyimpan Data Magang";
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Request $request){
-        $data = mahasiswa::all()->where("id_mhs", $request->id_mhs)->first();
+    public function show(Request $request)
+    {
+        $data = magang::all()->where("id_magang", $request->id)->first();
         return $data;
     }
 
@@ -56,13 +53,12 @@ class APIController extends Controller
      */
     public function edit(Request $request)
     {
-        $data = mahasiswa::all()->where('id_mhs', $request->id_mhs)->first();
-        $data->NIM = $request->NIM;
-        $data->Nama = $request->Nama;
-        $data->Prodi = $request->Prodi;
-        $data->Alamat = $request->Alamat;
+        $data = magang::all()->where('id_magang', $request->id_magang)->first();
+        $data->nama_tempat = $request->nama_tempat;
+        $data->posisi = $request->posisi;
+        $data->alamat = $request->alamat;
         $data->save();
-        return 'Berhasil Mengubah Data Mahasiswa';
+        return 'Berhasil Mengubah Data Magang';
     }
 
     /**
@@ -78,8 +74,8 @@ class APIController extends Controller
      */
     public function destroy(Request $request)
     {
-        $del = mahasiswa::all()->where('id_mhs', $request->id_mhs)->first();
+        $del = magang::all()->where('id_magang', $request->id_magang)->first();
         $del->delete();
-        return 'Berhasil Menghapus Data Mahasiswa';
+        return 'Berhasil Menghapus Data Magang';
     }
 }
