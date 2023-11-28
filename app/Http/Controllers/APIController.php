@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\mahasiswa;
 use App\Models\akademik;
 use App\Models\rekomendasi;
+use Illuminate\Support\Facades\DB;
 
 class APIController extends Controller
 {
@@ -40,15 +41,23 @@ class APIController extends Controller
         $save->Alamat = $request->Alamat;
         $save->save();
 
-        return "Berhasil Menyimpan Data Mahasiswa";
+        return redirect()->intended('/admin-mhs');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Request $request){
-        $data = mahasiswa::all()->where("id_mhs", $request->id_mhs)->first();
-        return $data;
+    // public function show(Request $request){
+    //     $datamhs = mahasiswa::all()->where("id_mhs", $request->id_mhs)->first();
+    //     return $datamhs;
+    // }
+
+    public function showDataMhs()
+    {
+        $datamhs = mahasiswa::all();
+                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
+                    // ->get();
+        return view('data.admin-mhs',compact('datamhs'));
     }
 
     /**
@@ -76,10 +85,13 @@ class APIController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $del = mahasiswa::all()->where('id_mhs', $request->id_mhs)->first();
-        $del->delete();
-        return 'Berhasil Menghapus Data Mahasiswa';
+        $datamhs = mahasiswa::where('id', $id)->first();
+        $datamhs->delete();
+        DB::statement('SET @var := 0');
+        DB::statement('UPDATE mahasiswa SET id = (@var := @var+1)');
+        DB::statement('ALTER TABLE mahasiswa AUTO_INCREMENT=1');
+        return redirect()->intended('/admin-mhs');
     }
 }

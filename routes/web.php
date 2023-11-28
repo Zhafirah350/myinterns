@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\APIController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/Controllers',[APIController::class,"index"]);
+
+Route::get('/admin-mhs', function () {
+    return view('data.admin-mhs');
+});
+
+Route::get('/inputmhs', function () {
+    return view('data.inputmhs');
+});
+
+Route::get('/admin-mhs', [APIController::class, 'showDataMhs']);
+Route::delete('/hapus/{id}', [APIController::class, "destroy"]);
+
+Route::post('/tambah', [APIController::class,"store"]);
+
+
