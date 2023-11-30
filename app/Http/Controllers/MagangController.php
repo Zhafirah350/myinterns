@@ -31,21 +31,24 @@ class MagangController extends Controller
     public function store(Request $request)
     {
         $save = new magang;
+        $save->kode_tempat = $request->kode_tempat;
         $save->nama_tempat = $request->nama_tempat;
         $save->posisi = $request->posisi;
         $save->alamat = $request->alamat;
         $save->save();
 
-        return "Berhasil Menyimpan Data Magang";
+        return redirect()->intended('/admin-magang');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function showMagang(Request $request)
     {
-        $data = magang::all()->where("id_magang", $request->id)->first();
-        return $data;
+        $datamg = magang::all();
+                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
+                    // ->get();
+        return view('data.admin-magang',compact('datamagang'));
     }
 
     /**
@@ -53,7 +56,8 @@ class MagangController extends Controller
      */
     public function edit(Request $request)
     {
-        $data = magang::all()->where('id_magang', $request->id_magang)->first();
+        $data = magang::all()->where('kode_tempat', $request->kode_tempat)->first();
+        $data->kode_tempat = $request->kode_tempat;
         $data->nama_tempat = $request->nama_tempat;
         $data->posisi = $request->posisi;
         $data->alamat = $request->alamat;
@@ -74,7 +78,7 @@ class MagangController extends Controller
      */
     public function destroy(Request $request)
     {
-        $del = magang::all()->where('id_magang', $request->id_magang)->first();
+        $del = magang::all()->where('kode_tempat', $request->kode_tempat)->first();
         $del->delete();
         return 'Berhasil Menghapus Data Magang';
     }

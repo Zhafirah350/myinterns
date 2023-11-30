@@ -13,10 +13,8 @@ class akademik extends Model
     protected $primarykey = 'id_ak';
     protected $fillable = [
         // 'id_ak',
-        'id_mhs',
+        'kode_matkul',
         'nim',
-        'nama',
-        'matkul',
         'nilai_akhir',
     ];
 }

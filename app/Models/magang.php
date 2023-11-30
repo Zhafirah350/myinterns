@@ -10,9 +10,9 @@ class magang extends Model
     use HasFactory;
     protected $table = 'magang';
     public $timestamps = false;
-    protected $primarykey = 'id_magang';
+    protected $primarykey = 'kode_tempat';
     protected $fillable = [
-        // 'id_magang',
+        'kode_tempat',
         'nama_tempat',
         'posisi',
         'alamat',

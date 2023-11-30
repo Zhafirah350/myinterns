@@ -13,9 +13,8 @@ class rekomendasi extends Model
     protected $primarykey = 'id_rekom';
     protected $fillable = [
         // 'id_rekom',
-        'id_mhs',
         'id_ak',
-        'id_magang',
+        'kode_tempat',
         'hasil_rekom',
     ];
 }

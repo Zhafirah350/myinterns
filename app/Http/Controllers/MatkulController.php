@@ -35,7 +35,7 @@ class MatkulController extends Controller
         $save->nama_matkul = $request->nama_matkul;
         $save->save();
 
-        return "Berhasil Menyimpan Data Mata Kuliah";
+        return redirect()->intended('/admin-matkul');
     }
 
     /**
@@ -43,8 +43,10 @@ class MatkulController extends Controller
      */
     public function show(Request $request)
     {
-        $data = matkul::all()->where("kode_matkul", $request->kode_matkul)->first();
-        return $data;
+        $datamhs = matkul::all();
+                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
+                    // ->get();
+        return view('data.admin-matkul',compact('datamatkul'));
     }
 
     /**
