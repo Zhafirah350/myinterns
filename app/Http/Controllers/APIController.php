@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mahasiswa;
+use App\Models\magang;
 use Illuminate\Support\Facades\DB;
 
 class APIController extends Controller
@@ -12,6 +13,16 @@ class APIController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function s()
+    {
+        $datamg = magang::all();
+                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
+                    // ->get();
+
+                    return 1;
+        // return view('data.admin-magang',compact('datamg'));
+    }
+
     public function index()
     {
         $data = mahasiswa::all();
@@ -33,7 +44,7 @@ class APIController extends Controller
     {
         // return "hello";
         $save = new mahasiswa;
-        $save->nim = $request->nim;
+        $save->id = $request->id;
         $save->nama = $request->nama;
         $save->prodi = $request->prodi;
         $save->alamat = $request->alamat;
@@ -73,7 +84,7 @@ class APIController extends Controller
 
     public function getMahasiswa($nim)
     {
-        $mahasiswa = mahasiswa::where('nim', $nim)->first();
+        $mahasiswa = mahasiswa::where('id', $nim)->first();
         if ($mahasiswa) {
             return response()->json($mahasiswa);
         } else {
@@ -86,7 +97,7 @@ class APIController extends Controller
      */
     public function editmhs($id)
     {
-        $datamhs = mahasiswa::where('nim', $id);
+        $datamhs = mahasiswa::where('id', $id);
         return view('data.editmhs',compact('datamhs'));
     }
 
@@ -104,9 +115,9 @@ class APIController extends Controller
     //     return redirect()->intended('data');
     // }
 
-    public function updatemhs(Request $request, $nim)
+    public function updatemhs(Request $request, $id)
 {
-    $mahasiswa = mahasiswa::where('nim', $nim)->first();
+    $mahasiswa = mahasiswa::where('id', $id)->first();
     if ($mahasiswa) {
         $mahasiswa->nama = $request->nama;
         $mahasiswa->prodi = $request->prodi;
@@ -121,9 +132,9 @@ class APIController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroymhs($id)
     {
-        $datamhs = mahasiswa::where('nim', $id);
+        $datamhs = mahasiswa::where('id', $id);
         $datamhs->delete();
         // DB::statement('SET @var := 0');
         // DB::statement('UPDATE mahasiswa SET id = (@var := @var+1)');

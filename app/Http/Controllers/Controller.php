@@ -18,4 +18,14 @@ class Controller extends BaseController
     //                 // ->get();
     //     return view('data.admin-mhs',compact('mahasiswa'));
     // }
+
+    public function s()
+    {
+        $datamg = magang::all();
+                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
+                    // ->get();
+
+                    return 1;
+        // return view('data.admin-magang',compact('datamg'));
+    }
 }

@@ -34,7 +34,9 @@
     <div class="button">
         <a href="/admin-mhs" class="btn btn-primary btn-lg"><i class="fas fa-user-graduate"></i> Mahasiswa</a>
         <a href="/admin-magang" class="btn btn-primary btn-lg"><i class="fas fa-briefcase"></i> Magang</a>
-        <a href="/" class="btn btn-primary btn-lg"><i class="fas fa-book"></i> Matkul</a>
+        <a href="/admin-matkul" class="btn btn-primary btn-lg"><i class="fas fa-book"></i> Matkul</a>
+        <a href="/admin-nilai" class="btn btn-primary btn-lg"><i class="fas fa-award"></i> Nilai</a>
+        <a href="/admin-rekom" class="btn btn-primary btn-lg"><i class="fas fa-crown"></i> Rekomendasi</a>
     </div>
 
     </body>

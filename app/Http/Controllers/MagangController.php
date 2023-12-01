@@ -31,7 +31,7 @@ class MagangController extends Controller
     public function store(Request $request)
     {
         $save = new magang;
-        $save->kode_tempat = $request->kode_tempat;
+        $save->id = $request->id;
         $save->nama_tempat = $request->nama_tempat;
         $save->posisi = $request->posisi;
         $save->alamat = $request->alamat;
@@ -43,43 +43,71 @@ class MagangController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showMagang(Request $request)
+    public function show()
     {
         $datamg = magang::all();
                     // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
                     // ->get();
-        return view('data.admin-magang',compact('datamagang'));
+        return view('data.admin-magang',compact('datamg'));
+    }
+
+    public function getMagang($id)
+    {
+        $magang = magang::where('kode_tempat', $id)->first();
+        if ($magang) {
+            return response()->json($magang);
+        } else {
+            return response()->json(['message' => 'Perusahaan not found.'], 404);
+        }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function editmagang($id)
     {
-        $data = magang::all()->where('kode_tempat', $request->kode_tempat)->first();
-        $data->kode_tempat = $request->kode_tempat;
-        $data->nama_tempat = $request->nama_tempat;
-        $data->posisi = $request->posisi;
-        $data->alamat = $request->alamat;
-        $data->save();
-        return 'Berhasil Mengubah Data Magang';
+        $datamg = magang::where('kode_tempat', $id);
+        return view('data.editmg',compact('datamagang'));
     }
+
+    // public function edit(Request $request)
+    // {
+    //     $data = magang::all()->where('kode_tempat', $request->kode_tempat)->first();
+    //     $data->kode_tempat = $request->kode_tempat;
+    //     $data->nama_tempat = $request->nama_tempat;
+    //     $data->posisi = $request->posisi;
+    //     $data->alamat = $request->alamat;
+    //     $data->save();
+    //     return 'Berhasil Mengubah Data Magang';
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function updatemagang(Request $request, $id)
+{
+    $magang = magang::where('id', $id)->first();
+    if ($magang) {
+        $magang->nama_tempat = $request->nama_tempat;
+        $magang->posisi = $request->posisi;
+        $magang->alamat = $request->alamat;
+        $magang->save();
+        return redirect()->intended('/admin-magang');
+    } else {
+        return response()->json(['message' => 'Magang not found.'], 404);
     }
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $del = magang::all()->where('kode_tempat', $request->kode_tempat)->first();
-        $del->delete();
-        return 'Berhasil Menghapus Data Magang';
+        $datamg = magang::where('id', $id);
+        $datamg->delete();
+        // DB::statement('SET @var := 0');
+        // DB::statement('UPDATE mahasiswa SET id = (@var := @var+1)');
+        // DB::statement('ALTER TABLE mahasiswa AUTO_INCREMENT=1');
+        return redirect()->intended('/admin-magang');
     }
 }

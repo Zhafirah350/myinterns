@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\MagangController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,12 @@ use App\Http\Controllers\APIController;
 */
 
 
-
+//INDEX
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/Controllers',[APIController::class,"index"]);
-
+//MAHASISWA
 Route::get('/admin-mhs', function () {
     return view('data.admin-mhs');
 });
@@ -30,20 +30,17 @@ Route::get('/inputmhs', function () {
     return view('data.inputmhs');
 });
 
-// Route::get('/editmhs', function () {
-//     return view('data.editmhs');
-// });
-
+Route::put('/admin-mhs/{id}', [APIController::class, 'updatemhs']);
 Route::get('/admin-mhs', [APIController::class, 'showDataMhs']);
-Route::delete('/hapus/{id}', [APIController::class, "destroy"]);
-Route::get('/data/{id}', [APIController::class, 'editmhs']);
-Route::put('/admin-mhs', [APIController::class, 'updatemhs']);
-// Route::get('/edit-mhs/{id}', [APIController::class, "editmhs"]);
-// Route::put('/edit-mhs/{id}', [APIController::class, 'updatemhs']);
+Route::delete('/admin-mhs/hapus/{id}', [APIController::class, "destroymhs"]);
+Route::post('/admin-mhs/tambah', [APIController::class,"store"]);
 
-Route::post('/tambah', [APIController::class,"store"]);
-Route::get('/admin-mhs', [APIController::class, "getMahasiswa"]);
-// Route::get('/editmhs', [APIController::class, "getMahasiswa"])->name('datamhs');
-// Route::get('/editmhs/{nim}', [APIController::class, "getMahasiswa"])->name('datamhs');
-
-
+// //MAGANG
+Route::get('/admin-magang', function () {
+    return view('data.admin-magang');
+});
+Route::post('/admin-magang/tambah', [MagangController::class,"store"]);
+Route::get('/admin-magang', [MagangController::class, 'show']);
+Route::delete('/hapus/{id}', [MagangController::class, "destroy"]);
+// Route::get('/admin-magang', [MagangController::class, "getMagang"]);
+Route::put('/admin-magang/{kode_tempat}', [MagangController::class, 'updatemagang']);

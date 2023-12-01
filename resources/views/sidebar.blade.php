@@ -80,6 +80,16 @@
                         <i class="fas fa-book"></i> Mata Kuliah
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin-nilai">
+                        <i class="fas fa-award"></i> Nilai
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin-rekom">
+                        <i class="fas fa-crown"></i> Rekomendasi
+                    </a>
+                </li>
                 <!-- Add more links as needed -->
             </ul>
         </nav>

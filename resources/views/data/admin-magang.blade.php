@@ -1,7 +1,7 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\MagangController;
 ?>
 
 @extends ('sidebar')
@@ -49,29 +49,70 @@ use App\Http\Controllers\Controller;
     <table class="table table-bordered mx-auto">
         <thead>
             <tr>
-                <th>Kode Tempat</th>
-                <th>Nama Tempat</th>
+                <th>Kode Perusahaan</th>
+                <th>Nama Perusahaan</th>
                 <th>Pekerjaan</th>
                 <th>Alamat</th>
-                <th>Aksi</th> <!-- Tambahkan kolom Aksi -->
+                <th style="width:200px">Aksi</th> <!-- Tambahkan kolom Aksi -->
             </tr>
         </thead>
         <!-- Inside your table body -->
 <tbody>
-    @foreach($datamhs as $mhs)
+    @foreach($datamg as $mg)
         <tr class="table-light">
-        <td>{{ $mhs->nim }}</td>
-        <td>{{ $mhs->nama }}</td>
-        <td>{{ $mhs->prodi }}</td>
-        <td>{{ $mhs->alamat }}</td>
+        <td>{{ $mg->id }}</td>
+        <td>{{ $mg->nama_tempat }}</td>
+        <td>{{ $mg->posisi }}</td>
+        <td>{{ $mg->alamat }}</td>
             <td>
-                <form class="d-inline" action="/hapus/{{ $mhs->nim }}" method="POST">
+            <!-- <a href="/editmhs" class="btn btn-warning text-white">Edit</a> -->
+            <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
+                <form class="d-inline" action="/hapus/{{ $mg->id }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
                 </form>
             </td>
         </tr>
+        <!-- modal edit -->
+<div class="modal fade" id="modal{{ $mg->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mg->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalLabel{{ $mg->id }}">Edit Data Magang</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="/admin-magang/{{ $mg->id }}" method="POST">
+          @csrf
+          @method('PUT')
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="id">Kode Perusahaan</label>
+              <input type="text" class="form-control" id="id" name="id" value="{{ $mg->id }}" readonly>
+            </div>
+            <div class="form-group">
+              <label for="nama">Nama Perusahaan</label>
+              <input type="text" class="form-control" id="nama_tempat" name="nama_tempat" value="{{ $mg->nama_tempat }}">
+            </div>
+            <div class="form-group">
+              <label for="nama">Pekerjaan</label>
+              <input type="text" class="form-control" id="posisi" name="posisi" value="{{ $mg->posisi }}">
+            </div>
+            <div class="form-group">
+              <label for="alamat">Alamat</label>
+              <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $mg->alamat }}">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
     @endforeach
 </tbody>
 </table>
@@ -79,36 +120,33 @@ use App\Http\Controllers\Controller;
 </div>
 </div>
 </div>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- Modal Add-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Magang</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/tambah" method="post">
+                <form action="/admin-magang/tambah" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="NIM"><b>NIM</b></label>
-                        <input class="form-control" type="text" name="nim" id="nim" placeholder="Masukkan Nim">
+                        <label for="id"><b>Kode Perusahaan</b></label>
+                        <input class="form-control" type="text" name="id" id="id" placeholder="Masukkan Kode Perusahaan">
                     </div>
                     <div class="form-group">
-                        <label for="Nama"><b>Nama Mahasiswa</b></label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Masukkan Nama">
+                        <label for="nama_tempat"><b>Nama Perusahaan</b></label>
+                        <input class="form-control" type="text" name="nama_tempat" id="nama_tempat" placeholder="Masukkan Nama Perusahaan">
                     </div>
                     <div class="form-group">
-                        <label for="Prodi"><b>Program Studi</b></label><br>
-                        <input type="radio" id="Prodi_TI" name="prodi" value="TI">
-                        <label for="Prodi_TI">Teknik Informatika</label>
-                        <input type="radio" id="Prodi_SIB" name="prodi" value="SIB">
-                        <label for="Prodi_SIB">Sistem Informasi Bisnis</label>
+                        <label for="posisi"><b>Pekerjaan</b></label>
+                        <input class="form-control" type="text" name="posisi" id="posisi" placeholder="Masukkan Pekerjaan">
                     </div>
                     <div class="form-group">
-                        <label for="Alamat"><b>Alamat</b></label>
+                        <label for="alamat"><b>Alamat</b></label>
                         <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat">
                     </div>
                     <div class="form-group float-right">
