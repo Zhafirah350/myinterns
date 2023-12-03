@@ -38,7 +38,7 @@ use App\Http\Controllers\MagangController;
             <!-- <div class="button">
                 <a href="/inputmhs" class="btn btn-success"><i class="fa fa-plus"></i> Add</a>
             </div> -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> Add
             </button>
         </div>
@@ -67,10 +67,10 @@ use App\Http\Controllers\MagangController;
             <td>
             <!-- <a href="/editmhs" class="btn btn-warning text-white">Edit</a> -->
             <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
-                <form class="d-inline" action="/hapus/{{ $mg->id }}" method="POST">
+                <form class="d-inline" action="/admin-magang/hapus/{{ $mg->id }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit" class="btn btn-danger"> <i class="fas fa-trash"></i></button>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>

@@ -43,10 +43,10 @@ class MatkulController extends Controller
      */
     public function show(Request $request)
     {
-        $datamhs = matkul::all();
+        $datamk = matkul::all();
                     // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
                     // ->get();
-        return view('data.admin-matkul',compact('datamatkul'));
+        return view('data.admin-matkul',compact('datamk'));
     }
 
     /**
@@ -60,18 +60,26 @@ class MatkulController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $datamk = matkul::where('kode_matkul', $id)->first();
+        if ($datamk) {
+            $datamk->kode_matkul = $request->kode_matkul;
+            $datamk->nama_matkul = $request->nama_matkul;
+            $datamk->save();
+            return redirect()->intended('/admin-matkul');
+        } else {
+            return response()->json(['message' => 'Mata Kuliah not found.'], 404);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $del = matkul::all()->where('kode_matkul', $request->kode_matkul)->first();
-        $del->delete();
-        return 'Berhasil Menghapus Data Mata Kuliah';
+        $datamk = matkul::where('kode_matkul', $id);
+        $datamk->delete();
+        return redirect()->intended('/admin-matkul');
     }
 }

@@ -10,7 +10,7 @@ class rekomendasi extends Model
     use HasFactory;
     protected $table = 'rekomendasi';
     public $timestamps = false;
-    protected $primarykey = 'id_rekom';
+    protected $primaryKey = 'id_rekom';
     protected $fillable = [
         // 'id_rekom',
         'id_ak',

@@ -1,24 +1,14 @@
 <?php
 namespace App\Http\Controllers;
-use App\Http\Controllers\APIController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\Controller;
 ?>
 
 @extends ('sidebar')
-@section('title', 'Mahasiswa')
+@section('title', 'Nilai Mahasiswa')
 
 @section('content')
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>MyInterns||Admin Kampus</title>
-</head>
-<body> -->
+{{-- content --}}
 <div class="container mt-6">
     <div class="row">
         <div class="col-md-6 text-left">
@@ -26,13 +16,12 @@ use App\Http\Controllers\Controller;
         </div>
     </div>
 
-
     <!-- Tabel dengan kelas Bootstrap -->
     <div class="card shadow mb-4">
     <div class="card-header py-3">
     <div class="row">
         <div class="col-md-6 text-left">
-            <h4 class="m-0 font-weight-bold text-primary">Data Mahasiswa</h4>
+            <h4 class="m-0 font-weight-bold text-primary">{{$mahasiswa->nama}} - {{$mahasiswa->id}}</h4>
         </div>
         <div class="col-md-6 text-right">
             <!-- <div class="button">
@@ -49,28 +38,26 @@ use App\Http\Controllers\Controller;
     <table class="table table-bordered mx-auto">
         <thead>
             <tr>
-                <th>NIM</th>
-                <th>Nama</th>
-                <th>Program Studi</th>
-                <th>Alamat</th>
+                {{-- <th>Nama</th> --}}
+                <th>Mata Kuliah</th>
+                <th>Nilai</th>
+                {{-- <th>Program Studi</th> --}}
+                {{-- <th>Alamat</th> --}}
                 <th>Aksi</th> <!-- Tambahkan kolom Aksi -->
             </tr>
         </thead>
         <!-- Inside your table body -->
 <tbody>
-    @foreach($datamhs as $mhs)
+    @foreach($datanilai as $nilai)
         <tr class="table-light">
-        <td>{{ $mhs->id }}</td>
-        <td>{{ $mhs->nama }}</td>
-        <td>{{ $mhs->prodi }}</td>
-        <td>{{ $mhs->alamat }}</td>
+        {{-- <td>{{ $nilai->nama }}</td> --}}
+        <td>{{ $nilai->nama_matkul }}</td>
+        <td>{{ $nilai->nilai_akhir }}</td>
+        {{-- <td>{{ $mhs->prodi }}</td> --}}
+        {{-- <td>{{ $mhs->alamat }}</td> --}}
             <td>
-            <!-- <a href="/editmhs" class="btn btn-warning text-white">Edit</a> -->
-            <!-- <button class="btn btn-warning text-white" data-toggle="modal" data-target="#editModal" data-nim="{{ $mhs->nim }}">Edit</button> -->
-            <!-- <button class="btn btn-warning text-white edit-btn" data-toggle="modal" data-target="#editModal" data-nim="{{ $mhs->nim }}" data-nama="{{ $mhs->nama }}" data-prodi="{{ $mhs->prodi }}" data-alamat="{{ $mhs->alamat }}">Edit</button> -->
-            <a href="{{ url('/admin-mhs/admin-nilai/' . $mhs->id) }}"><button type="button" class="btn btn-primary text-white">Detail</button></a>
-            <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mhs->id }}">Edit</button>
-                <form class="d-inline" action="/admin-mhs/hapus/{{ $mhs->id }}" method="POST">
+            {{-- <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mhs->id }}"><i class="fas fa-pen"></i> Edit</button> --}}
+                {{-- <form class="d-inline" action="/admin-mhs/hapus/{{ $mhs->id }}" method="POST"> --}}
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -78,7 +65,7 @@ use App\Http\Controllers\Controller;
             </td>
         </tr>
         <!-- modal edit -->
-<div class="modal fade" id="modal{{ $mhs->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mhs->id }}" aria-hidden="true">
+{{-- <div class="modal fade" id="modal{{ $mhs->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mhs->id }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -126,7 +113,7 @@ use App\Http\Controllers\Controller;
         </form>
       </div>
     </div>
-  </div>
+  </div> --}}
     @endforeach
 </tbody>
 </table>
@@ -139,21 +126,21 @@ use App\Http\Controllers\Controller;
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Mahasiswa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Kuliah</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <form action="/admin-mhs/tambah" method="post">
+                <form action="" method="post">
                     @csrf
                     <div class="form-group">
                         <label for="id"><b>NIM</b></label>
-                        <input class="form-control" type="text" name="id" id="id" placeholder="Masukkan Nim">
+                        <input class="form-control" type="text" name="id" id="id" value="{{ $mahasiswa->id }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="Nama"><b>Nama Mahasiswa</b></label>
-                        <input class="form-control" type="text" name="nama" id="nama" placeholder="Masukkan Nama">
+                        <input class="form-control" type="text" name="nama" id="nama" value="{{ $mahasiswa->nama }}" readonly>
                     </div>
                     <div class="form-group">
                         <label for="Prodi"><b>Program Studi</b></label><br>
@@ -175,47 +162,4 @@ use App\Http\Controllers\Controller;
         </div>
     </div>
 </div>
-
-<!-- Modal Edit -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Mahasiswa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/edit" method="post">
-                    @method('put')
-                    @csrf
-                    <div class="form-group">
-                        <label for="NIM"><b>NIM</b></label>
-                        <input class="form-control" type="text" name="nim" id="nim" value="{{ $mhs->nim }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="Nama"><b>Nama Mahasiswa</b></label>
-                        <input class="form-control" type="text" name="nama" id="nama" value="{{ $mhs->nama }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="Prodi"><b>Program Studi</b></label><br>
-                        <input type="radio" id="Prodi_TI" name="prodi" value="TI">
-                        <label for="Prodi_TI">Teknik Informatika</label>
-                        <input type="radio" id="Prodi_SIB" name="prodi" value="SIB">
-                        <label for="Prodi_SIB">Sistem Informasi Bisnis</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="Alamat"><b>Alamat</b></label>
-                        <input class="form-control" type="text" name="alamat" id="alamat" value="{{ $mhs->alamat }}">
-                    </div>
-                    <div class="form-group float-right">
-                        <button class="btn btn-danger" type="reset">Reset</button>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 @endsection

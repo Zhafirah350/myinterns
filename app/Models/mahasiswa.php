@@ -10,7 +10,7 @@ class mahasiswa extends Model
     use HasFactory;
     protected $table = 'mahasiswa';
     public $timestamps = false;
-    protected $primarykey = 'id';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $fillable = [
         'id',
@@ -18,4 +18,9 @@ class mahasiswa extends Model
         'prodi',
         'alamat',
     ];
+
+    public function mk()
+    {
+        return $this->belongsToMany(MatkulController::class);
+    }
 }

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\mahasiswa;
-use App\Models\magang;
 use Illuminate\Support\Facades\DB;
 
 class APIController extends Controller
@@ -13,15 +12,6 @@ class APIController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function s()
-    {
-        $datamg = magang::all();
-                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
-                    // ->get();
-
-                    return 1;
-        // return view('data.admin-magang',compact('datamg'));
-    }
 
     public function index()
     {
@@ -42,7 +32,6 @@ class APIController extends Controller
      */
     public function store(Request $request)
     {
-        // return "hello";
         $save = new mahasiswa;
         $save->id = $request->id;
         $save->nama = $request->nama;
@@ -64,6 +53,7 @@ class APIController extends Controller
     public function showDataMhs()
     {
         $datamhs = mahasiswa::all();
+        $mhs = mahasiswa::orderBy('nama', 'desc');
                     // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
                     // ->get();
         return view('data.admin-mhs',compact('datamhs'));
@@ -101,19 +91,16 @@ class APIController extends Controller
         return view('data.editmhs',compact('datamhs'));
     }
 
+    public function cariMahasiswa($nama)
+    {
+        $datamhs = mahasiswa::where('nama', 'like', '%' . $nama . '%')->get();
+        return view('data.admin-mhs', compact('datamhs'));
+    }
+
+
     /**
      * Update the specified resource in storage.
      */
-    // public function updatemhs(Request $request, $id)
-    // {
-    //     $datamhs = mahasiswa::where('nim', $id);
-    //     $datamhs->nim = $request->nim;
-    //     $datamhs->nama = $request->nama;
-    //     $datamhs->prodi = $request->prodi;
-    //     $datamhs->alamat = $request->alamat;
-    //     $datamhs->save();
-    //     return redirect()->intended('data');
-    // }
 
     public function updatemhs(Request $request, $id)
 {

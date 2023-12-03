@@ -10,7 +10,7 @@ class magang extends Model
     use HasFactory;
     protected $table = 'magang';
     public $timestamps = false;
-    protected $primarykey = 'kid';
+    protected $primaryKey = 'id';
     public $incrementing = false;
     protected $fillable = [
         'id',

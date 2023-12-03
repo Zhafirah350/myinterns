@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\APIController;
 use App\Http\Controllers\MagangController;
+use App\Http\Controllers\MatkulController;
+use App\Http\Controllers\NilaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +27,9 @@ Route::get('/', function () {
 Route::get('/admin-mhs', function () {
     return view('data.admin-mhs');
 });
-
 Route::get('/inputmhs', function () {
     return view('data.inputmhs');
 });
-
 Route::put('/admin-mhs/{id}', [APIController::class, 'updatemhs']);
 Route::get('/admin-mhs', [APIController::class, 'showDataMhs']);
 Route::delete('/admin-mhs/hapus/{id}', [APIController::class, "destroymhs"]);
@@ -41,6 +41,16 @@ Route::get('/admin-magang', function () {
 });
 Route::post('/admin-magang/tambah', [MagangController::class,"store"]);
 Route::get('/admin-magang', [MagangController::class, 'show']);
-Route::delete('/hapus/{id}', [MagangController::class, "destroy"]);
-// Route::get('/admin-magang', [MagangController::class, "getMagang"]);
+Route::delete('admin-magang/hapus/{id}', [MagangController::class, "destroy"]);
 Route::put('/admin-magang/{kode_tempat}', [MagangController::class, 'updatemagang']);
+
+// MATKUL
+Route::get('/admin-matkul', function () {
+    return view('data.admin-matkul');
+});
+Route::post('/admin-matkul/tambah', [MatkulController::class,"store"]);
+Route::get('/admin-matkul', [MatkulController::class, 'show']);
+Route::delete('/admin-matkul/hapus/{kode_matkul}', [MatkulController::class, "destroy"]);
+Route::put('/admin-matkul/{kode_matkul}', [MatkulController::class, 'update']);
+
+Route::get('/admin-mhs/admin-nilai/{id}', [NilaiController::class, 'show']);

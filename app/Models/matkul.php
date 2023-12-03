@@ -10,9 +10,15 @@ class matkul extends Model
     use HasFactory;
     protected $table = 'matkul';
     public $timestamps = false;
-    protected $primarykey = 'kode_matkul';
+    protected $primaryKey = 'kode_matkul';
+    public $incrementing = false;
     protected $fillable = [
         'kode_matkul',
         'nama_matkul',
     ];
+
+    public function mhs()
+    {
+        return $this->belongsToMany(APIController::class);
+    }
 }

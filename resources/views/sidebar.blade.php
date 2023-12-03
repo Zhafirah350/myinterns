@@ -55,6 +55,7 @@
     <nav class="navbar navbar-dark bg-dark fixed-top">
         <a class="navbar-brand" href="#">MyInterns</a>
     </nav>
+    
 
     <!-- Sidebar -->
     <div class="d-flex">
@@ -78,11 +79,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/admin-matkul">
                         <i class="fas fa-book"></i> Mata Kuliah
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin-nilai">
-                        <i class="fas fa-award"></i> Nilai
                     </a>
                 </li>
                 <li class="nav-item">

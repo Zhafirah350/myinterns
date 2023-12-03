@@ -31,12 +31,15 @@
         }
     </style>
 
+    <nav class="navbar navbar-light fixed-top" style="background-color: #12486C; height: 60px">
+        <a class="navbar-brand" href="#" style="color: white">MyInterns</a>
+    </nav>
+
     <div class="button">
-        <a href="/admin-mhs" class="btn btn-primary btn-lg"><i class="fas fa-user-graduate"></i> Mahasiswa</a>
-        <a href="/admin-magang" class="btn btn-primary btn-lg"><i class="fas fa-briefcase"></i> Magang</a>
-        <a href="/admin-matkul" class="btn btn-primary btn-lg"><i class="fas fa-book"></i> Matkul</a>
-        <a href="/admin-nilai" class="btn btn-primary btn-lg"><i class="fas fa-award"></i> Nilai</a>
-        <a href="/admin-rekom" class="btn btn-primary btn-lg"><i class="fas fa-crown"></i> Rekomendasi</a>
+        <a href="/admin-mhs" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-user-graduate"></i> Mahasiswa</a>
+        <a href="/admin-magang" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-briefcase"></i> Magang</a>
+        <a href="/admin-matkul" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-book"></i> Matkul</a>
+        <a href="/admin-rekom" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-crown"></i> Rekomendasi</a>
     </div>
 
     </body>
