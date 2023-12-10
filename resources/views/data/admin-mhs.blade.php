@@ -92,15 +92,15 @@ use App\Http\Controllers\Controller;
           @method('PUT')
           <div class="modal-body">
           <div class="form-group">
-              <label for="nama">NIM</label>
+              <label for="nama"><b>NIM</b></label>
               <input type="text" class="form-control" id="nim" name="nim" value="{{ $mhs->id }}" readonly>
             </div>
             <div class="form-group">
-              <label for="nama">Nama</label>
+              <label for="nama"><b>Nama</b></label>
               <input type="text" class="form-control" id="nama" name="nama" value="{{ $mhs->nama }}">
             </div>
             <div class="form-group">
-              <label for="prodi">Program Studi</label>
+              <label for="prodi"><b>Program Studi</b></label>
               <div class="form-check">
                 <input class="form-check-input" type="radio" name="prodi" id="prodi1" value="TI" {{ $mhs->prodi == 'TI' ? 'checked' : '' }}>
                 <label class="form-check-label" for="prodi1">
@@ -115,7 +115,7 @@ use App\Http\Controllers\Controller;
               </div>
             </div>
             <div class="form-group">
-              <label for="alamat">Alamat</label>
+              <label for="alamat"><b>Alamat</b></label>
               <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $mhs->alamat }}">
             </div>
           </div>
@@ -175,47 +175,4 @@ use App\Http\Controllers\Controller;
         </div>
     </div>
 </div>
-
-<!-- Modal Edit -->
-<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Mahasiswa</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="/edit" method="post">
-                    @method('put')
-                    @csrf
-                    <div class="form-group">
-                        <label for="NIM"><b>NIM</b></label>
-                        <input class="form-control" type="text" name="nim" id="nim" value="{{ $mhs->nim }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="Nama"><b>Nama Mahasiswa</b></label>
-                        <input class="form-control" type="text" name="nama" id="nama" value="{{ $mhs->nama }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="Prodi"><b>Program Studi</b></label><br>
-                        <input type="radio" id="Prodi_TI" name="prodi" value="TI">
-                        <label for="Prodi_TI">Teknik Informatika</label>
-                        <input type="radio" id="Prodi_SIB" name="prodi" value="SIB">
-                        <label for="Prodi_SIB">Sistem Informasi Bisnis</label>
-                    </div>
-                    <div class="form-group">
-                        <label for="Alamat"><b>Alamat</b></label>
-                        <input class="form-control" type="text" name="alamat" id="alamat" value="{{ $mhs->alamat }}">
-                    </div>
-                    <div class="form-group float-right">
-                        <button class="btn btn-danger" type="reset">Reset</button>
-                        <button class="btn btn-primary" type="submit">Submit</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 @endsection

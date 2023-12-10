@@ -82,7 +82,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin-rekom">
+                    <a class="nav-link" href="/rekomendasi">
                         <i class="fas fa-crown"></i> Rekomendasi
                     </a>
                 </li>

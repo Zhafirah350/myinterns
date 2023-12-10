@@ -45,9 +45,8 @@ class MagangController extends Controller
      */
     public function show()
     {
-        $datamg = magang::all();
-                    // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
-                    // ->get();
+        $datamg = magang::join('posisi','magang.id_posisi','=','posisi.id_posisi')
+                    ->get();
         return view('data.admin-magang',compact('datamg'));
     }
 

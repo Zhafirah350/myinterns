@@ -38,9 +38,9 @@ use App\Http\Controllers\MagangController;
             <!-- <div class="button">
                 <a href="/inputmhs" class="btn btn-success"><i class="fa fa-plus"></i> Add</a>
             </div> -->
-            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            {{-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> Add
-            </button>
+            </button> --}}
         </div>
     </div>
     </div>
@@ -53,7 +53,7 @@ use App\Http\Controllers\MagangController;
                 <th>Nama Perusahaan</th>
                 <th>Pekerjaan</th>
                 <th>Alamat</th>
-                <th style="width:200px">Aksi</th> <!-- Tambahkan kolom Aksi -->
+                {{-- <th style="width:200px">Aksi</th> <!-- Tambahkan kolom Aksi --> --}}
             </tr>
         </thead>
         <!-- Inside your table body -->
@@ -62,17 +62,17 @@ use App\Http\Controllers\MagangController;
         <tr class="table-light">
         <td>{{ $mg->id }}</td>
         <td>{{ $mg->nama_tempat }}</td>
-        <td>{{ $mg->posisi }}</td>
+        <td>{{ $mg->nama_posisi }}</td>
         <td>{{ $mg->alamat }}</td>
-            <td>
+            {{-- <td> --}}
             <!-- <a href="/editmhs" class="btn btn-warning text-white">Edit</a> -->
-            <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
+            {{-- <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
                 <form class="d-inline" action="/admin-magang/hapus/{{ $mg->id }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-            </td>
+            </td> --}}
         </tr>
         <!-- modal edit -->
 <div class="modal fade" id="modal{{ $mg->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mg->id }}" aria-hidden="true">
@@ -89,19 +89,19 @@ use App\Http\Controllers\MagangController;
           @method('PUT')
           <div class="modal-body">
             <div class="form-group">
-              <label for="id">Kode Perusahaan</label>
+              <label for="id"><b>Kode Perusahaan</b></label>
               <input type="text" class="form-control" id="id" name="id" value="{{ $mg->id }}" readonly>
             </div>
             <div class="form-group">
-              <label for="nama">Nama Perusahaan</label>
+              <label for="nama"><b>Nama Perusahaan</b></label>
               <input type="text" class="form-control" id="nama_tempat" name="nama_tempat" value="{{ $mg->nama_tempat }}">
             </div>
             <div class="form-group">
-              <label for="nama">Pekerjaan</label>
+              <label for="nama"><b>Pekerjaan</b></label>
               <input type="text" class="form-control" id="posisi" name="posisi" value="{{ $mg->posisi }}">
             </div>
             <div class="form-group">
-              <label for="alamat">Alamat</label>
+              <label for="alamat"><b>Alamat</b></label>
               <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $mg->alamat }}">
             </div>
           </div>

@@ -39,7 +39,7 @@
         <a href="/admin-mhs" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-user-graduate"></i> Mahasiswa</a>
         <a href="/admin-magang" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-briefcase"></i> Magang</a>
         <a href="/admin-matkul" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-book"></i> Matkul</a>
-        <a href="/admin-rekom" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-crown"></i> Rekomendasi</a>
+        <a href="/rekomendasi" class="btn btn-primary btn-lg" style="background-color: #12486C; border: none;"><i class="fas fa-crown"></i> Rekomendasi</a>
     </div>
 
     </body>

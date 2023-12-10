@@ -57,7 +57,7 @@ use App\Http\Controllers\Controller;
         {{-- <td>{{ $mhs->alamat }}</td> --}}
             <td>
             {{-- <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mhs->id }}"><i class="fas fa-pen"></i> Edit</button> --}}
-                {{-- <form class="d-inline" action="/admin-mhs/hapus/{{ $mhs->id }}" method="POST"> --}}
+                <form class="d-inline" action="/admin-mhs/admin-nilai/hapus/{{ $nilai->id_ak }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -132,26 +132,28 @@ use App\Http\Controllers\Controller;
                 </button>
             </div>
             <div class="modal-body">
-                <form action="" method="post">
+                <form action="/admin-mhs/admin-nilai/tambah" method="post">
                     @csrf
                     <div class="form-group">
-                        <label for="id"><b>NIM</b></label>
-                        <input class="form-control" type="text" name="id" id="id" value="{{ $mahasiswa->id }}" readonly>
+                        <label for="nim"><b>NIM</b></label>
+                        <input class="form-control" type="text" name="nim" id="nim" value="{{ $mahasiswa->id }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="Nama"><b>Nama Mahasiswa</b></label>
-                        <input class="form-control" type="text" name="nama" id="nama" value="{{ $mahasiswa->nama }}" readonly>
+                        <label for="nama_mhs"><b>Nama Mahasiswa</b></label>
+                        <input class="form-control" type="text" name="nama_mhs" id="nama_mhs" value="{{ $mahasiswa->nama }}" readonly>
                     </div>
                     <div class="form-group">
-                        <label for="Prodi"><b>Program Studi</b></label><br>
-                        <input type="radio" id="Prodi_TI" name="prodi" value="TI">
-                        <label for="Prodi_TI">Teknik Informatika</label>
-                        <input type="radio" id="Prodi_SIB" name="prodi" value="SIB">
-                        <label for="Prodi_SIB">Sistem Informasi Bisnis</label>
+                      <label for="nama_matkul"><b>Mata Kuliah</b></label><br>
+                        <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="kode_matkul" id="kode_matkul">
+                          <option selected>Pilih Mata Kuliah</option>
+                          @foreach($datamk as $matkul)
+                          <option value="{{  $matkul->kode_matkul  }}">{{  $matkul->nama_matkul  }}</option>
+                          @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
-                        <label for="Alamat"><b>Alamat</b></label>
-                        <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat">
+                        <label for="nilai_akhir"><b>Nilai</b></label><br>
+                        <input class="form-control" type="number" step="any" min="0" max="100" name="nilai_akhir" id="nilai_akhir" placeholder="Masukkan Nilai">
                     </div>
                     <div class="form-group float-right">
                         <button class="btn btn-danger" type="reset">Reset</button>

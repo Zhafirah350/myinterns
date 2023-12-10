@@ -5,6 +5,7 @@ use App\Http\Controllers\APIController;
 use App\Http\Controllers\MagangController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\RekomController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +28,9 @@ Route::get('/', function () {
 Route::get('/admin-mhs', function () {
     return view('data.admin-mhs');
 });
-Route::get('/inputmhs', function () {
-    return view('data.inputmhs');
-});
+// Route::get('/inputmhs', function () {
+//     return view('data.inputmhs');
+// });
 Route::put('/admin-mhs/{id}', [APIController::class, 'updatemhs']);
 Route::get('/admin-mhs', [APIController::class, 'showDataMhs']);
 Route::delete('/admin-mhs/hapus/{id}', [APIController::class, "destroymhs"]);
@@ -53,4 +54,14 @@ Route::get('/admin-matkul', [MatkulController::class, 'show']);
 Route::delete('/admin-matkul/hapus/{kode_matkul}', [MatkulController::class, "destroy"]);
 Route::put('/admin-matkul/{kode_matkul}', [MatkulController::class, 'update']);
 
+// NILAI
 Route::get('/admin-mhs/admin-nilai/{id}', [NilaiController::class, 'show']);
+Route::post('/admin-mhs/admin-nilai/tambah', [NilaiController::class, 'store']);
+Route::delete('/admin-mhs/admin-nilai/hapus/{id}', [NilaiController::class, "destroy"]);
+
+// REKOMENDASI
+Route::get('/rekomendasi', function () {
+    return view('data.rekomendasi');
+});
+Route::get('/rekomendasi', [RekomController::class, 'showDataMhs']);
+Route::get('/rekomendasi/{id}', [RekomController::class, 'tampilRekomendasi']);
