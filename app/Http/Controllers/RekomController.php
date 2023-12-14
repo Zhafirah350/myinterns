@@ -59,7 +59,6 @@ class RekomController extends Controller
             $hasilPos1 += $nilai->nilai_akhir * $bobotPos1[$nilai->kode_matkul];
             $hasilPos2 += $nilai->nilai_akhir * $bobotPos2[$nilai->kode_matkul];
         }
-        
 
         $posisi = $hasilPos1 > $hasilPos2 ? 'P01' : 'P02';
         
