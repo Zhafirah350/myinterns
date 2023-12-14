@@ -35,12 +35,9 @@ use App\Http\Controllers\Controller;
             <h4 class="m-0 font-weight-bold text-primary">Data Matkul</h4>
         </div>
         <div class="col-md-6 text-right">
-            <!-- <div class="button">
-                <a href="/inputmhs" class="btn btn-success"><i class="fa fa-plus"></i> Add</a>
-            </div> -->
-            {{-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> Add
-            </button> --}}
+            </button>
         </div>
     </div>
     </div>
@@ -51,7 +48,7 @@ use App\Http\Controllers\Controller;
             <tr>
                 <th>Kode MK</th>
                 <th>Nama MK</th>
-                {{-- <th>Aksi</th> <!-- Tambahkan kolom Aksi --> --}}
+                <th>Aksi</th> <!-- Tambahkan kolom Aksi -->
             </tr>
         </thead>
         <!-- Inside your table body -->
@@ -60,15 +57,16 @@ use App\Http\Controllers\Controller;
         <tr class="table-light">
         <td>{{ $mk->kode_matkul }}</td>
         <td>{{ $mk->nama_matkul }}</td>
-            {{-- <td>
-            <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mk->kode_matkul }}">Edit</button>
+            <td>
+            {{-- <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mk->kode_matkul }}">Edit</button> --}}
                 <form class="d-inline" action="/admin-matkul/hapus/{{ $mk->kode_matkul }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-            </td> --}}
+            </td>
         </tr>
+
         <!-- modal edit -->
 <div class="modal fade" id="modal{{ $mk->kode_matkul }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mk->kode_matkul }}" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -107,6 +105,7 @@ use App\Http\Controllers\Controller;
 </div>
 </div>
 </div>
+
 <!-- Modal Add-->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="AddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

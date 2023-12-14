@@ -14,10 +14,15 @@ class RekomController extends Controller
     public function showDataMhs()
     {
         $datamhs = mahasiswa::all();
-        $mhs = mahasiswa::orderBy('nama', 'desc');
                     // ->join('api_datas','sertifikats.nim_mhs','=','api_datas.nim')
                     // ->get();
         return view('data.rekomendasi',compact('datamhs'));
+    }
+
+    public function showAll()
+    {
+        $datamhs = mahasiswa::all();
+        return response()->json($datamhs);
     }
 
     public function tampilRekomendasi($id){
@@ -51,13 +56,16 @@ class RekomController extends Controller
         $hasilPos2 = 0;
 
         foreach ($nilaiMhs as $nilai) {
-            $hasilPos1 += $nilai->nilai * $bobotPos1[$nilai->kode_matkul];
-            $hasilPos2 += $nilai->nilai * $bobotPos2[$nilai->kode_matkul];
+            $hasilPos1 += $nilai->nilai_akhir * $bobotPos1[$nilai->kode_matkul];
+            $hasilPos2 += $nilai->nilai_akhir * $bobotPos2[$nilai->kode_matkul];
         }
+        
 
         $posisi = $hasilPos1 > $hasilPos2 ? 'P01' : 'P02';
         
-        $tempatMagang = magang::where('id_posisi',$posisi)->get();
+        $tempatMagang = magang::where('magang.id_posisi',$posisi)
+                        ->join('posisi','magang.id_posisi','=','posisi.id_posisi')
+                        ->get();
         return response()->json($tempatMagang);
     }
 }

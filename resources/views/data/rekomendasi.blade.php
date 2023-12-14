@@ -99,11 +99,11 @@ jQuery(document).ready(function($) {
 
   // Panggil metode 'tampilRekomendasi' dengan AJAX
   $.get('/rekomendasi/' + id, function(data) {
-    console     
+     
     // Buat daftar tempat magang
     var list = '<p>Rekomendasi tempat magang untuk ' + nama + ':</p><ol>';
     for (var i = 0; i < data.length; i++) {
-      list += '<li>' + data[i].nama_tempat + '</li>' + id;
+      list += '<li>' + data[i].nama_tempat + ' - ' + data[i].nama_posisi +'</li>';
     }
     list += '</ol>';
 

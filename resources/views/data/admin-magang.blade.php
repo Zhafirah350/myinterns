@@ -38,9 +38,9 @@ use App\Http\Controllers\MagangController;
             <!-- <div class="button">
                 <a href="/inputmhs" class="btn btn-success"><i class="fa fa-plus"></i> Add</a>
             </div> -->
-            {{-- <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
                 <i class="fa fa-plus"></i> Add
-            </button> --}}
+            </button>
         </div>
     </div>
     </div>
@@ -51,9 +51,9 @@ use App\Http\Controllers\MagangController;
             <tr>
                 <th>Kode Perusahaan</th>
                 <th>Nama Perusahaan</th>
-                <th>Pekerjaan</th>
+                <th>Posisi</th>
                 <th>Alamat</th>
-                {{-- <th style="width:200px">Aksi</th> <!-- Tambahkan kolom Aksi --> --}}
+                <th style="width:200px">Aksi</th> <!-- Tambahkan kolom Aksi -->
             </tr>
         </thead>
         <!-- Inside your table body -->
@@ -64,15 +64,15 @@ use App\Http\Controllers\MagangController;
         <td>{{ $mg->nama_tempat }}</td>
         <td>{{ $mg->nama_posisi }}</td>
         <td>{{ $mg->alamat }}</td>
-            {{-- <td> --}}
+            <td>
             <!-- <a href="/editmhs" class="btn btn-warning text-white">Edit</a> -->
-            {{-- <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
+            <button type="button" class="btn btn-warning text-white" data-toggle="modal" data-target="#modal{{ $mg->id }}">Edit</button>
                 <form class="d-inline" action="/admin-magang/hapus/{{ $mg->id }}" method="POST">
                     @csrf
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-            </td> --}}
+            </td>
         </tr>
         <!-- modal edit -->
 <div class="modal fade" id="modal{{ $mg->id }}" tabindex="-1" role="dialog" aria-labelledby="modalLabel{{ $mg->id }}" aria-hidden="true">
@@ -97,8 +97,12 @@ use App\Http\Controllers\MagangController;
               <input type="text" class="form-control" id="nama_tempat" name="nama_tempat" value="{{ $mg->nama_tempat }}">
             </div>
             <div class="form-group">
-              <label for="nama"><b>Pekerjaan</b></label>
-              <input type="text" class="form-control" id="posisi" name="posisi" value="{{ $mg->posisi }}">
+                <label for="id_posisi"><b>Posisi</b></label><br>
+                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="id_posisi" id="id_posisi">
+                    @foreach($datapos as $posisi)
+                    <option value="{{  $posisi->id_posisi  }}" {{$posisi->id_posisi == $mg->id_posisi ? 'selected' : ''}}>{{  $posisi->nama_posisi  }} - {{  $posisi->id_posisi  }}</option>
+                    @endforeach
+                  </select>
             </div>
             <div class="form-group">
               <label for="alamat"><b>Alamat</b></label>
@@ -142,9 +146,18 @@ use App\Http\Controllers\MagangController;
                         <input class="form-control" type="text" name="nama_tempat" id="nama_tempat" placeholder="Masukkan Nama Perusahaan">
                     </div>
                     <div class="form-group">
-                        <label for="posisi"><b>Pekerjaan</b></label>
-                        <input class="form-control" type="text" name="posisi" id="posisi" placeholder="Masukkan Pekerjaan">
+                        <label for="id_posisi"><b>Posisi</b></label><br>
+                          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="id_posisi" id="id_posisi">
+                            <option selected>Pilih Posisi</option>
+                            @foreach($datapos as $posisi)
+                            <option value="{{  $posisi->id_posisi  }}">{{  $posisi->nama_posisi  }}</option>
+                            @endforeach
+                          </select>
                     </div>
+                    {{-- <div class="form-group">
+                        
+                        <input class="form-control" type="text" name="posisi" id="posisi" placeholder="Masukkan Pekerjaan">
+                    </div> --}}
                     <div class="form-group">
                         <label for="alamat"><b>Alamat</b></label>
                         <input class="form-control" type="text" name="alamat" id="alamat" placeholder="Masukkan Alamat">

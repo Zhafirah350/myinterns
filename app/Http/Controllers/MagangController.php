@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\magang;
+use App\Models\posisi;
 
 class MagangController extends Controller
 {
@@ -33,7 +34,7 @@ class MagangController extends Controller
         $save = new magang;
         $save->id = $request->id;
         $save->nama_tempat = $request->nama_tempat;
-        $save->posisi = $request->posisi;
+        $save->id_posisi = $request->id_posisi;
         $save->alamat = $request->alamat;
         $save->save();
 
@@ -47,17 +48,9 @@ class MagangController extends Controller
     {
         $datamg = magang::join('posisi','magang.id_posisi','=','posisi.id_posisi')
                     ->get();
-        return view('data.admin-magang',compact('datamg'));
-    }
-
-    public function getMagang($id)
-    {
-        $magang = magang::where('kode_tempat', $id)->first();
-        if ($magang) {
-            return response()->json($magang);
-        } else {
-            return response()->json(['message' => 'Perusahaan not found.'], 404);
-        }
+        
+        $datapos = posisi::all();
+        return view('data.admin-magang',compact('datamg','datapos'));
     }
 
     /**
@@ -88,7 +81,7 @@ class MagangController extends Controller
     $magang = magang::where('id', $id)->first();
     if ($magang) {
         $magang->nama_tempat = $request->nama_tempat;
-        $magang->posisi = $request->posisi;
+        $magang->id_posisi = $request->id_posisi;
         $magang->alamat = $request->alamat;
         $magang->save();
         return redirect()->intended('/admin-magang');

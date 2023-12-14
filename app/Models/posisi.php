@@ -11,6 +11,7 @@ class posisi extends Model
     protected $table = 'posisi';
     public $timestamps = false;
     protected $primaryKey = 'id_posisi';
+    public $incrementing = false;
     protected $fillable = [
         'id_posisi',
         'nama_posisi',
